@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шифры простой замены - Презентация</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .header {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .slides-container {
+            width: 100%;
+            height: 70vh;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background-color: white;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            overflow-y: auto;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide-title {
+            font-size: 2rem;
+            color: #1a2a6c;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #fdbb2d;
+            padding-bottom: 10px;
+        }
+        
+        .slide-content {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        
+        .slide-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .slide-content li {
+            margin-bottom: 10px;
+        }
+        
+        .slide-content strong {
+            color: #b21f1f;
+        }
+        
+        .slide-content .highlight {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-left: 4px solid #1a2a6c;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 15px;
+        }
+        
+        .nav-btn {
+            background-color: #1a2a6c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background-color: #fdbb2d;
+            color: #333;
+        }
+        
+        .slide-indicators {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .indicator.active {
+            background-color: white;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 5px;
+            background-color: rgba(255,255,255,0.3);
+            margin-top: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: #fdbb2d;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        @media (max-width: 768px) {
+            .slide-title {
+                font-size: 1.5rem;
+            }
+            
+            .slide-content {
+                font-size: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Презентация: Шифры простой замены</h1>
+            <p>Лабораторная работа №1</p>
+        </div>
+        
+        <div class="slides-container">
+            <!-- Слайд 1 -->
+            <div class="slide active" id="slide1">
+                <h2 class="slide-title">Шифры простой замены</h2>
+                <div class="slide-content">
+                    <p><strong>Математические основы защиты информации и информационной безопасности</strong></p>
+                    <br>
+                    <p><strong>Автор:</strong> Фатеева Елизавета Артёмовна</p>
+                    <p><strong>Группа:</strong> НПИмд-01-24</p>
+                    <p><strong>Преподаватель:</strong> Кулябов Дмитрий Сергеевич</p>
+                    <p><strong>Дата:</strong> 24.09.2025</p>
+                    <br>
+                    <p><strong>Лабораторная работа №1</strong></p>
+                </div>
+            </div>
+            
+            <!-- Слайд 2 -->
+            <div class="slide" id="slide2">
+                <h2 class="slide-title">Актуальность изучения классической криптографии</h2>
+                <div class="slide-content">
+                    <div class="highlight">
+                        <h3>Фундаментальная основа</h3>
+                        <p>Шифры простой замены являются основой всей классической криптографии и первым шагом к пониманию современных методов защиты информации.</p>
+                    </div>
+                    
+                    <div class="highlight">
+                        <h3>Принципы подстановки</h3>
+                        <p>Изучение моноалфавитных подстановок помогает понять базовые механизмы преобразования данных в криптографических системах.</p>
+                    </div>
+                    
+                    <div class="highlight">
+                        <h3>Практические навыки</h3>
+                        <p>Программная реализация алгоритмов развивает навыки создания криптографических систем и подготавливает к работе со сложными методами.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Слайд 3 -->
+            <div class="slide" id="slide3">
+                <h2 class="slide-title">Цель и задачи лабораторной работы</h2>
+                <div class="slide-content">
+                    <div class="highlight">
+                        <h3>Основная цель:</h3>
+                        <p>Изучение и практическая реализация шифров простой замены на языке программирования <strong>Julia</strong> с созданием полнофункциональных криптографических инструментов.</p>
+                    </div>
+                    
+                    <h3>Задачи:</h3>
+                    <ul>
+                        <li>Реализовать шифр Цезаря с произвольным ключом</li>
+                        <li>Создать алгоритм шифра Атбаш</li>
+                        <li>Разработать интерактивные тестеры</li>
+                        <li>Провести тестирование корректности работы</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Слайд 4 -->
+            <div class="slide" id="slide4">
+                <h2 class="slide-title">Шифр Цезаря: теоретические основы</h2>
+                <div class="slide-content">
+                    <p>Шифр Цезаря — один из древнейших методов шифрования, названный в честь римского императора Юлия Цезаря, который использовал его для секретной переписки.</p>
+                    <br>
+                    
+                    <div class="highlight">
+                        <h3>01 Принцип работы</h3>
+                        <p>Каждая буква исходного текста заменяется буквой, находящейся на фиксированное количество позиций дальше в алфавите.</p>
+                    </div>
+                    
+                    <div class="highlight">
+                        <h3>02 Ключ шифрования</h3>
+                        <p>Числовое значение сдвига (обычно от 1 до 25 для латинского алфавита), определяющее величину смещения букв.</p>
+                    </div>
+                    
+                    <div class="highlight">
+                        <h3>03 Циклический характер</h3>
+                        <p>При достижении конца алфавита происходит переход к его началу, обеспечивая непрерывность преобразования.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Слайд 5 -->
+            <div class="slide" id="slide5">
+                <h2 class="slide-title">Шифр Атбаш: древняя мудрость</h2>
+                <div class="slide-content">
+                    <p>Атбаш — древний метод шифрования, возникший в еврейской традиции около VI века до н.э. Название происходит от первых и последних букв еврейского алфавита.</p>
+                    <br>
+                    
+                    <div class="highlight">
+                        <h3>А ↔ пробел</h3>
+                        <p>Первая буква алфавита заменяется последней</p>
+                    </div>
+                    
+                    <div class="highlight">
+                        <h3>Б ↔ Я</h3>
+                        <p>Вторая буква заменяется предпоследней</p>
+                    </div>
+                    
+                    <div class="highlight">
+                        <h3>В ↔ Ю</h3>
+                        <p>И так далее по принципу зеркального отражения</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Слайд 6 -->
+            <div class="slide" id="slide6">
+                <h2 class="slide-title">Реализация шифра Цезаря</h2>
+                <div class="slide-content">
+                    <h3>Функциональность</h3>
+                    <ul>
+                        <li>Функции <strong>caesar_encrypt</strong> и <strong>caesar_decrypt</strong></li>
+                        <li>Полная поддержка регистра символов</li>
+                        <li>Сохранение знаков препинания</li>
+                        <li>Работа с кириллицей и латиницей</li>
+                    </ul>
+                    <br>
+                    
+                    <h3>Пример работы</h3>
+                    <div class="highlight">
+                        <p><strong>Исходный текст:</strong> "Привет, мир!"</p>
+                        <p><strong>Ключ:</strong> 3</p>
+                        <p><strong>Зашифрованный текст:</strong> "Тулезх, плу!"</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Слайд 7 -->
+            <div class="slide" id="slide7">
+                <h2 class="slide-title">Реализация шифра Атбаш</h2>
+                <div class="slide-content">
+                    <div class="highlight">
+                        <h3>Единая функция</h3>
+                        <p><strong>atbash_encrypt</strong> выполняет как шифрование, так и дешифрование благодаря симметричности алгоритма.</p>
+                    </div>
+                    
+                    <div class="highlight">
+                        <h3>Универсальность</h3>
+                        <p>Поддержка русского и английского алфавитов с корректной обработкой регистра букв.</p>
+                    </div>
+                    
+                    <div class="highlight">
+                        <h3>Сохранение структуры</h3>
+                        <p>Пунктуация, пробелы и числа остаются неизменными для сохранения читаемости.</p>
+                    </div>
+                    
+                    <br>
+                    <h3>Пример:</h3>
+                    <div class="highlight">
+                        <p><strong>"КРИПТОГРАФИЯ"</strong> → <strong>"ХУЛЯЩСЮЬБЧЛЯ"</strong></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Слайд 8 -->
+            <div class="slide" id="slide8">
+                <h2 class="slide-title">Интерактивное тестирование</h2>
+                <div class="slide-content">
+                    <div class="highlight">
+                        <h3>Удобный интерфейс</h3>
+                        <p>Разработаны интерактивные тестеры с интуитивно понятным меню выбора действий для каждого алгоритма.</p>
+                    </div>
+                    
+                    <div class="highlight">
+                        <h3>Комплексное тестирование</h3>
+                        <p>Проведена проверка корректности работы на различных типах текста, включая смешанные алфавиты.</p>
+                    </div>
+                    
+                    <p>Все алгоритмы успешно прошли тестирование на корректность обработки русских и английских текстов различной сложности.</p>
+                </div>
+            </div>
+            
+            <!-- Слайд 9 -->
+            <div class="slide" id="slide9">
+                <h2 class="slide-title">Результаты и достижения</h2>
+                <div class="slide-content">
+                    <div style="display: flex; justify-content: space-around; margin: 30px 0;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 3rem; color: #1a2a6c; font-weight: bold;">100%</div>
+                            <p>Успешная реализация</p>
+                            <p>Оба шифра полностью реализованы на Julia</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 3rem; color: #1a2a6c; font-weight: bold;">100%</div>
+                            <p>Корректность</p>
+                            <p>Алгоритмы прошли все тесты</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 3rem; color: #1a2a6c; font-weight: bold;">100%</div>
+                            <p>Функциональность</p>
+                            <p>Интерактивные тестеры работают безупречно</p>
+                        </div>
+                    </div>
+                    
+                    <p>Лабораторная работа позволила не только освоить основы классической криптографии, но и развить практические навыки программирования криптографических алгоритмов.</p>
+                </div>
+            </div>
+            
+            <!-- Слайд 10 -->
+            <div class="slide" id="slide10">
+                <h2 class="slide-title">Спасибо за внимание!</h2>
+                <div class="slide-content">
+                    <p>Работа успешно выполнена в рамках дисциплины "Математические основы защиты информации и информационной безопасности"</p>
+                    <br>
+                    
+                    <div class="highlight">
+                        <h3>Полученные навыки</h3>
+                        <p>Практическое программирование криптографических алгоритмов на языке Julia</p>
+                    </div>
+                    
+                    <div class="highlight">
+                        <h3>Углубленное понимание</h3>
+                        <p>Принципы работы шифров простой замены и их место в истории криптографии</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        
+        <div class="navigation">
+            <button class="nav-btn" id="prevBtn">Назад</button>
+            <button class="nav-btn" id="nextBtn">Вперед</button>
+        </div>
+        
+        <div class="slide-indicators" id="indicators">
+            <!-- Индикаторы будут добавлены через JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const indicatorsContainer = document.getElementById('indicators');
+            const progressBar = document.getElementById('progress');
+            
+            let currentSlide = 0;
+            
+            // Создание индикаторов
+            slides.forEach((_, index) => {
+                const indicator = document.createElement('div');
+                indicator.classList.add('indicator');
+                if (index === 0) indicator.classList.add('active');
+                indicator.addEventListener('click', () => goToSlide(index));
+                indicatorsContainer.appendChild(indicator);
+            });
+            
+            // Обновление индикаторов и прогресс-бара
+            function updateIndicators() {
+                document.querySelectorAll('.indicator').forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === currentSlide);
+                });
+                
+                // Обновление прогресс-бара
+                const progress = ((currentSlide + 1) / slides.length) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+            
+            // Переход к определенному слайду
+            function goToSlide(slideIndex) {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = slideIndex;
+                slides[currentSlide].classList.add('active');
+                updateIndicators();
+            }
+            
+            // Следующий слайд
+            function nextSlide() {
+                if (currentSlide < slides.length - 1) {
+                    goToSlide(currentSlide + 1);
+                }
+            }
+            
+            // Предыдущий слайд
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    goToSlide(currentSlide - 1);
+                }
+            }
+            
+            // Обработчики событий для кнопок
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+            
+            // Обработчики событий для клавиатуры
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') nextSlide();
+                if (e.key === 'ArrowLeft') prevSlide();
+            });
+            
+            // Инициализация индикаторов
+            updateIndicators();
+        });
+    </script>
+</body>
+</html>
